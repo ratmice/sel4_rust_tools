@@ -1,0 +1,12 @@
+[package]
+name = "gen_syscalls"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+argh = "0.1.7"
+minijinja = "0.13.0"
+sel4_xml_types = {path = "../sel4_xml_types"}
+thiserror = "1.0.30"

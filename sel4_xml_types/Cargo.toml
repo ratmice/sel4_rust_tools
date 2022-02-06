@@ -1,0 +1,15 @@
+[package]
+name = "sel4_xml_types"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+thiserror = {version = "1.0.30"}
+roxmltree = "0.14.1"
+serde = {version = "1.0", features = ["derive"]}
+
+[dev-dependencies]
+quick-xml = { version = "0.22.0", features = ["serialize"]}
+serde-xml-rs = { version = "0.5.1"}
