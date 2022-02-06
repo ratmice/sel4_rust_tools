@@ -418,16 +418,16 @@ mod tests {
     #[test]
     fn test() -> Result<(), TestError> {
         let files = [
-            "../../kernel/libsel4/arch_include/x86/interfaces/sel4arch.xml",
-            "../../kernel/libsel4/arch_include/arm/interfaces/sel4arch.xml",
-            "../../kernel/libsel4/arch_include/riscv/interfaces/sel4arch.xml",
-            "../../kernel/libsel4/include/interfaces/sel4.xml",
-            "../../kernel/libsel4/sel4_arch_include/aarch32/interfaces/sel4arch.xml",
-            "../../kernel/libsel4/sel4_arch_include/aarch64/interfaces/sel4arch.xml",
-            "../../kernel/libsel4/sel4_arch_include/ia32/interfaces/sel4arch.xml",
-            "../../kernel/libsel4/sel4_arch_include/riscv32/interfaces/sel4arch.xml",
-            "../../kernel/libsel4/sel4_arch_include/riscv64/interfaces/sel4arch.xml",
-            "../../kernel/libsel4/sel4_arch_include/x86_64/interfaces/sel4arch.xml",
+            "../../../kernel/libsel4/arch_include/x86/interfaces/sel4arch.xml",
+            "../../../kernel/libsel4/arch_include/arm/interfaces/sel4arch.xml",
+            "../../../kernel/libsel4/arch_include/riscv/interfaces/sel4arch.xml",
+            "../../../kernel/libsel4/include/interfaces/sel4.xml",
+            "../../../kernel/libsel4/sel4_arch_include/aarch32/interfaces/sel4arch.xml",
+            "../../../kernel/libsel4/sel4_arch_include/aarch64/interfaces/sel4arch.xml",
+            "../../../kernel/libsel4/sel4_arch_include/ia32/interfaces/sel4arch.xml",
+            "../../../kernel/libsel4/sel4_arch_include/riscv32/interfaces/sel4arch.xml",
+            "../../../kernel/libsel4/sel4_arch_include/riscv64/interfaces/sel4arch.xml",
+            "../../../kernel/libsel4/sel4_arch_include/x86_64/interfaces/sel4arch.xml",
         ];
 
         for filename in files {

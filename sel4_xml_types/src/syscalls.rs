@@ -32,7 +32,7 @@ mod tests {
 
     #[test]
     fn quick_xml_works() -> Result<(), TestError> {
-        let f = File::open("../../../seL4test/kernel/libsel4/include/api/syscall.xml")?;
+        let f = File::open("../../../kernel/libsel4/include/api/syscall.xml")?;
         let reader = BufReader::new(f);
         let r: Syscalls = quick_xml::de::from_reader(reader)?;
         println!("{:#?}", r);
@@ -41,7 +41,7 @@ mod tests {
 
     #[test]
     fn serde_xml_works() -> Result<(), TestError> {
-        let f = File::open("../../../seL4test/kernel/libsel4/include/api/syscall.xml")?;
+        let f = File::open("../../../kernel/libsel4/include/api/syscall.xml")?;
         let reader = BufReader::new(f);
         let r: Syscalls = serde_xml_rs::de::from_reader(reader)?;
         println!("{:#?}", r);
