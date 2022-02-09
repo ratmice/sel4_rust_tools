@@ -3,6 +3,9 @@ use sel4_xml_types::*;
 use minijinja as jinja;
 use argh::FromArgs;
 use std::path::PathBuf;
+use std::fs::File as _;
+use std::io::Write as _;
+use std::{fs, io};
 use core::str::FromStr;
 use thiserror::Error;
 
@@ -27,6 +30,9 @@ struct TopArgs {
     /// xml files... 
     #[argh(option)]
     xml: Vec<PathBuf>,
+    /// output file.
+    #[argh(option, short = 'o')]
+    out: PathBuf
 }
 
 #[derive(Debug)]
@@ -49,6 +55,9 @@ fn language_arg(s: &str) -> Result<Language, String> {
      
 }
 
-fn main() {
+fn main() -> Result<(), std::io::Error> {
     let args: TopArgs = argh::from_env();
+    let mut out_file = std::fs::File::create(args.out)?;
+    out_file.write(b"const _: () = ();\n")?;
+    Ok(())
 }
