@@ -41,9 +41,9 @@ pub enum InvocationGenError {
 /// into more (hopefully) convenient types.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Api {
-    name: Option<String>,
-    label_prefix: Option<String>,
-    children: Vec<ApiElement>,
+    pub name: Option<String>,
+    pub label_prefix: Option<String>,
+    pub children: Vec<ApiElement>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -63,18 +63,18 @@ pub enum ApiElement {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Method {
     // Attributes
-    name: String,
-    id: String,
-    condition: Option<String>,
-    manual_name: Option<String>,
-    manual_label: Option<String>,
-    brief: Vec<DocLeaf>,
+    pub name: String,
+    pub id: String,
+    pub condition: Option<String>,
+    pub manual_name: Option<String>,
+    pub manual_label: Option<String>,
+    pub brief: Vec<DocLeaf>,
     // Purely a child element
-    description: Vec<DocLeaf>,
-    return_value: Vec<Return>,
-    cap_param: Option<CapParam>,
-    params: Vec<Param>,
-    errors: Vec<ErrorElement>,
+    pub description: Vec<DocLeaf>,
+    pub return_value: Vec<Return>,
+    pub cap_param: Option<CapParam>,
+    pub params: Vec<Param>,
+    pub errors: Vec<ErrorElement>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

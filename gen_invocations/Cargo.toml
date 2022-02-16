@@ -7,6 +7,8 @@ edition = "2021"
 
 [dependencies]
 argh = "0.1.7"
+const_format = "0.2.22"
 minijinja = "0.13.0"
+roxmltree = "0.14.1"
 sel4_xml_types = {path = "../sel4_xml_types"}
 thiserror = "1.0.30"
