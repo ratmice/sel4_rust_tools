@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "kebab-case")]
 pub struct Syscalls {
     pub api_master: Api,
@@ -8,18 +8,19 @@ pub struct Syscalls {
     pub debug: Api,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Api {
     pub config: Vec<Config>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Config {
     pub condition: Option<String>,
-    pub syscall: Vec<Syscall>,
+    #[serde(rename="syscall")]
+    pub syscalls: Vec<Syscall>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Syscall {
     pub name: String,
 }
