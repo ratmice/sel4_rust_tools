@@ -15,6 +15,7 @@ pub struct Api {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Config {
+    pub condition: Option<String>,
     pub syscall: Vec<Syscall>,
 }
 
