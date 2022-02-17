@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = "3.1.0"
+argh = "0.1.7"
 minijinja = "0.13.0"
 quick-xml = { version = "0.22.0", features = ["serialize"]}
 sel4_xml_types = {path = "../sel4_xml_types"}

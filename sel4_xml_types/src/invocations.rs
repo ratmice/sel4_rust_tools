@@ -1,7 +1,7 @@
+use crate::invocation_helper::*;
 use roxmltree as xml;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
-use crate::invocation_helper::*;
 
 //
 // While the syscall API is easily parsed with serde based xml libraries
@@ -36,7 +36,7 @@ pub enum InvocationGenError {
 
 /// While the types herein implement `Deserialize`
 /// They would not Deserialize to equivalent XML.
-/// 
+///
 /// This uses a read-only XML parser, and converts the parsed xml
 /// into more (hopefully) convenient types.
 #[derive(Debug, Serialize, Deserialize)]
@@ -149,7 +149,6 @@ impl<'a> TryFrom<roxmltree::Document<'a>> for Api {
     }
 }
 
-
 impl TryFrom<roxmltree::Node<'_, '_>> for Return {
     type Error = InvocationGenError;
     fn try_from(node: roxmltree::Node<'_, '_>) -> Result<Return, InvocationGenError> {
@@ -176,12 +175,9 @@ impl TryFrom<roxmltree::Node<'_, '_>> for ErrorElement {
 
         if let Some(node) = skip_irrelevant(node.first_child()) {
             let _node = take_leaves_from_element(node, "description", &mut description)?;
-        } 
+        }
 
-        Ok(ErrorElement {
-            name,
-            description,
-        })
+        Ok(ErrorElement { name, description })
     }
 }
 
@@ -345,7 +341,7 @@ impl<'a, 'b> TryFrom<roxmltree::Node<'a, 'b>> for Param {
                     Ok(Param {
                         typ,
                         name,
-                        dir,                        
+                        dir,
                         description,
                         errors,
                     })

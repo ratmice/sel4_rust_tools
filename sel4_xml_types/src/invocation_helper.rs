@@ -1,5 +1,5 @@
 use crate::invocations::*;
-pub (crate) trait AttributeExt {
+pub(crate) trait AttributeExt {
     type Error;
 
     fn opt_attr(self, attr: &'_ str) -> Option<String>;

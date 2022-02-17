@@ -3,24 +3,24 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "kebab-case")]
 pub struct Syscalls {
-   pub api_master: Api,
-   pub api_mcs: Api,
-   pub debug: Api,
+    pub api_master: Api,
+    pub api_mcs: Api,
+    pub debug: Api,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Api {
-   pub config: Vec<Config>,
+    pub config: Vec<Config>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Config {
-   pub syscall: Vec<Syscall>,
+    pub syscall: Vec<Syscall>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Syscall {
-   pub name: String,
+    pub name: String,
 }
 
 #[cfg(test)]

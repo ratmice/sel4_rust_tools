@@ -5,12 +5,9 @@
 //#
 //# SPDX-License-Identifier: BSD-2-Clause or GPL-2.0-only
 
-#![allow(unused_imports, unused_variables, dead_code)]
 use argh::FromArgs;
-use core::str::FromStr;
 use minijinja as jinja;
 use sel4_xml_types::invocations::*;
-use std::fs::File as _;
 use std::io::Read as _;
 use std::io::Write as _;
 use std::path::PathBuf;
@@ -21,11 +18,9 @@ mod lang_c;
 mod lang_rust;
 
 #[derive(Error, Debug)]
-enum Error<'a> {
-    #[error("Unknown language {0}")]
-    UnknownLanguage(&'a str),
+enum Error {
     #[error("Io Error: {0}")]
-    Io(#[from] std::io::Error),
+    Io(#[from] io::Error),
     #[error("MiniJinja Error: {0}")]
     Minijinja(#[from] jinja::Error),
     #[error("RoXmlTree Error: {0}")]
@@ -40,20 +35,20 @@ enum Error<'a> {
 // --sel4-arch true and complains about e.g. --sel4-arch --dest
 // because it is expecting a boolean.
 // investigate alternatives, or just do arg parsing by hand.
-/// gen_syscalls
+/// gen_invocations
 #[derive(FromArgs, Debug)]
 struct TopArgs {
     /// rust | c       default: [rust]
     #[argh(option, from_str_fn(language_arg))]
     lang: Language,
     /// libsel4
-    #[argh(switch, short='l')]
+    #[argh(switch, short = 'l')]
     libsel4: bool,
     /// arch
-    #[argh(switch, short='a')]
+    #[argh(switch, short = 'a')]
     arch: bool,
     /// sel4_arch
-    #[argh(switch, short='s')]
+    #[argh(switch, short = 's')]
     sel4_arch: bool,
     /// xml file...
     #[argh(option)]
@@ -78,9 +73,9 @@ fn language_arg(s: &str) -> Result<Language, String> {
     }
 }
 
-fn main() -> Result<(), Error<'static>> {
+fn main() -> Result<(), Error> {
     let args: TopArgs = argh::from_env();
-    let mut dest_file = std::fs::File::create(args.dest)?;
+    let mut dest_file = fs::File::create(args.dest)?;
     let mut env = jinja::Environment::new();
 
     // So we catch any template parsing errors early
@@ -97,18 +92,18 @@ fn main() -> Result<(), Error<'static>> {
             "Rust_sel4_arch_invocation",
             lang_rust::SEL4_ARCH_INVOCATION_TEMPLATE,
         )?;
-        env.add_template("Rust_arch_invocation", lang_rust::ARCH_INVOCATION_TEMPLATE)?;        
+        env.add_template("Rust_arch_invocation", lang_rust::ARCH_INVOCATION_TEMPLATE)?;
         let _ = env.get_template("C_invocation")?;
         let _ = env.get_template("C_sel4_arch_invocation")?;
         let _ = env.get_template("C_arch_invocation")?;
-    
+
         let _ = env.get_template("Rust_invocation")?;
         let _ = env.get_template("Rust_sel4_arch_invocation")?;
         let _ = env.get_template("Rust_arch_invocation")?;
     }
 
-    let xml_in = std::fs::File::open(args.xml)?;
-    let mut reader = std::io::BufReader::new(xml_in);
+    let xml_in = fs::File::open(args.xml)?;
+    let mut reader = io::BufReader::new(xml_in);
     let mut s = String::new();
     let _len = reader.read_to_string(&mut s)?;
     let xml_tree = roxmltree::Document::parse(&s)?;
@@ -137,7 +132,7 @@ fn main() -> Result<(), Error<'static>> {
 
     let template = if args.arch {
         env.get_template(&format!("{lang}_invocation"))
-    } else if args.libsel4 {
+    } else if args.sel4_arch {
         env.get_template(&format!("{lang}_sel4_arch_invocation"))
     } else {
         env.get_template(&format!("{lang}_arch_invocation"))
