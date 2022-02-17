@@ -34,6 +34,12 @@ enum Error<'a> {
     Sel4XmlTypes(#[from] sel4_xml_types::invocations::InvocationGenError),
 }
 
+// argh isn't quite working out here:
+// It wants to rewrite sel4_arch to --sel4-arch
+// it requires a short opt otherwise it wants to read
+// --sel4-arch true and complains about e.g. --sel4-arch --dest
+// because it is expecting a boolean.
+// investigate alternatives, or just do arg parsing by hand.
 /// gen_syscalls
 #[derive(FromArgs, Debug)]
 struct TopArgs {
